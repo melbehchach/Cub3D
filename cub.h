@@ -15,9 +15,13 @@
 
 typedef struct s_parse
 {
+	char	**content;
 	char	*line;
 	int		num_line;
 	int		fd;
+	int		length;
+	int		iter;
+
 }t_parse;
 
 // typedef struct s_data
@@ -34,7 +38,7 @@ typedef struct s_parse
 
 void ft_puterrmsg(char *msg);
 int	parse(char *file);
-
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 
 

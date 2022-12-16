@@ -3,10 +3,10 @@ CFLAGS = -Wall -Werror -Wextra
 NAME_M = cub
 HEADER = ./cub.h
 SRC = ./main.c \
+		./parse.c \
+		./util_functions.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \
-		./parse.c \
-		./util_functions.c
 
 OBJ = $(SRC:.c=.o)
 
