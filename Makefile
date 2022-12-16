@@ -3,8 +3,8 @@ CFLAGS = -Wall -Werror -Wextra
 NAME_M = cub
 HEADER = ./cub.h
 SRC = ./main.c \
-		./parse.c \
 		./util_functions.c \
+		./parser/parse.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \
 

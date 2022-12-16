@@ -17,10 +17,11 @@ typedef struct s_parse
 {
 	char	**content;
 	char	*line;
-	int		num_line;
-	int		fd;
+	int		size;
+	int		nb_line;
 	int		length;
-	int		iter;
+	int		index;
+	int		fd;
 
 }t_parse;
 
@@ -36,9 +37,13 @@ typedef struct s_parse
 /*				UTIL FUNCTIONS						*/
 /****************************************************/
 
-void ft_puterrmsg(char *msg);
-int	parse(char *file);
+void	ft_puterrmsg(char *msg);
+t_parse	*create_struct(void);
+char	*create_array(int size);
+char	**create_2d_array(int size);
+int		parse(char *file);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 
 
