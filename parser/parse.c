@@ -84,7 +84,26 @@ static void	creat_content_array(t_parse *obj, char *file)
 static void check_content_array(t_parse *obj)
 {
 	obj->index = 0;
-		
+	puts("[DEBUG]");
+	while (obj->index < 6)
+	{
+		if (ft_strncmp(obj->content[obj->index], "NO ", 3) > 0)
+		{
+			puts("Error");
+			return;
+		}
+		else if (ft_strncmp(obj->content[obj->index], "SO ", 3) > 0)
+			return;
+		else if (ft_strncmp(obj->content[obj->index], "WE ", 3) > 0)
+			return;
+		else if (ft_strncmp(obj->content[obj->index], "EA ", 3) > 0)
+			return;
+		else if (ft_strncmp(obj->content[obj->index], "F ", 2) > 0)
+			return;
+		else if (ft_strncmp(obj->content[obj->index], "c ", 2) > 0)
+			return;
+		obj->index++;
+	}
 }
 
 int	parse(char *file)
@@ -97,7 +116,7 @@ int	parse(char *file)
 	lines_counter(obj, file);
 	verify_empty_lines(obj, file);
 	creat_content_array(obj, file);
-	check_end_of_file(obj);
+	check_content_array(obj);
 	// obj->index = 0;
 	// while(obj->content[obj->index])
 	// {
@@ -105,7 +124,7 @@ int	parse(char *file)
 	// 	obj->index++;
 	// }
 	// printf("%s\n", obj->content[obj->index]);
-	free(obj->content);
-	free(obj);
+	// free(obj->content);
+	// free(obj);
 	return (0);
 }
