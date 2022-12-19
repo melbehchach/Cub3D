@@ -43,6 +43,26 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (s1[i] - s2[i]);
 }
 
+char	*ft_strrchr(const char *s, int c)
+{
+	char	*str;
+	int		i;
+
+	str = (char *)s;
+	i = 0;
+	if (str[i] == '\0' && c == '\0')
+		return (&str[i]);
+	while (str[i])
+		i++;
+	while (i >= 0)
+	{
+		if (str[i] == (char)c)
+			return (&str[i]);
+		i--;
+	}
+	return (NULL);
+}
+
 t_parse	*create_struct(void)
 {
 	t_parse *stc;
@@ -71,4 +91,21 @@ char	**create_2d_array(int size)
 	if(!tab)
 		tab = NULL;
 	return (tab);
+}
+
+int	file_name_checker(char *file)
+{
+	int	i;
+
+	i = 0;
+	while (file[i])
+	{
+		if (file[i] == '.')
+		{
+			if (ft_strncmp(&file[i + 1], "cub", 4) == 0)
+				return (1);
+		}
+		i++;
+	}
+	return (0);
 }

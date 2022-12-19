@@ -22,7 +22,6 @@ typedef struct s_parse
 	int		length;
 	int		index;
 	int		fd;
-
 }t_parse;
 
 // typedef struct s_data
@@ -44,7 +43,8 @@ char	**create_2d_array(int size);
 int		parse(char *file);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
+char	*ft_strrchr(const char *s, int c);
+int		file_name_checker(char *file);
 
 
 

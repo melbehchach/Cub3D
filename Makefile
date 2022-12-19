@@ -13,15 +13,15 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME_M)
 
 $(NAME_M): $(OBJ)
-	@$(CC) $(OBJ) ./minilibx/libmlx.a -framework OpenGL -framework AppKit -o $(NAME_M)
+	$(CC) $(OBJ) ./minilibx/libmlx.a -framework OpenGL -framework AppKit -o $(NAME_M)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
 
 clean:
-	@rm -rf $(OBJ)
+	rm -rf $(OBJ)
 
 fclean: clean
-	@rm -rf $(NAME_M)
+	rm -rf $(NAME_M)
 
 re : fclean all
