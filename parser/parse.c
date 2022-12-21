@@ -114,9 +114,50 @@ static int check_direction_elements(t_parse *obj)
 	return (0);
 }
 
-static void	map_checker(char *line)
+static int	borders_checker(int nb_line, t_parse *obj)
 {
+	int	i;
 
+	i = 0;
+	while (obj->content[nb_line][i])
+	{
+		if (obj->content[nb_line][i] == '\t')
+			i++;
+		else if (obj->content[nb_line][i] == '1')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+static int map_content_checker(char *line)
+{
+	int i;
+	int	player;
+
+	i = 0;
+	player = 0;
+	while (line[i])
+	{
+		if (line[i] == '\t')
+			i++;
+		else if (line[i] == '1')
+			i++;
+		else if (line[i] == '0')
+			i++;
+		else if (line[i] == 'N')
+			i++;
+		else if (line[i] == 'S')
+			i++;
+		else if (line[i] == 'W')
+			i++;
+		else if (line[i] == 'E')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
 }
 
 int	parse(char *file)
@@ -130,12 +171,23 @@ int	parse(char *file)
 		printf("Error\nProblem in the direction name in the map file\n");
 		return (0);
 	}
-	obj.index = 0;
-	while(obj.content[obj.index])
+	if (borders_checker(6, &obj) == 0 || borders_checker((obj.size - 1), &obj) == 0)
 	{
-		free(obj.content[obj.index]);
+		printf("Error\nMap borders are not correct\n");
+		return (0);
+	}
+	obj.index = 7;
+	while(obj.index < (obj.size - 6))
+	{
+		if (map_content_checker(obj.content[obj.index]) == 0)
+		{
+			printf("line => %d\n", obj.index);
+			puts("Error\nContent map is not correct");
+			return (0);
+		}
 		obj.index++;
 	}
+	// free(obj.content[obj.index]);
 	free(obj.content);
 	return (0);
 }
