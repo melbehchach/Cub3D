@@ -5,6 +5,9 @@ HEADER = ./cub.h
 SRC = ./main.c \
 		./util_functions.c \
 		./parser/parse.c \
+		./parser/map.c \
+		./parser/direction_elements.c \
+		./parser/map_parser.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \
 

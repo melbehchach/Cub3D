@@ -109,3 +109,19 @@ int	file_name_checker(char *file)
 	}
 	return (0);
 }
+
+int	open_file(char *file)
+{
+	int fd;
+
+	fd = open(file, O_RDWR);
+	if (fd < 0)
+	{
+		printf("Error\n");
+		ft_puterrmsg(file);
+		ft_puterrmsg(": ");
+		perror("");
+		return (-1);
+	}
+	return (fd);
+}
