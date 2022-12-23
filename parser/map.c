@@ -14,6 +14,7 @@
 
 /*The use of obj->nb_line is to count all the lines occupied in the file */
 /*And for nb->size is to have the right size to allocate for the creation of an array that contains the content of the file*/
+/*The condition size > 6 to check if we have an empty line in the map*/
 
 static int	lines_counter(t_parse *obj, char *file)
 {
@@ -30,7 +31,9 @@ static int	lines_counter(t_parse *obj, char *file)
 		obj->length = ft_strlen(obj->line);
 		if (obj->length > 1)
 			obj->size++;
-		obj->nb_line++;
+		if (obj->size > 6 && obj->length <= 1)
+			return (-1);
+	obj->nb_line++;
 	}
 	close(obj->fd);
 	return (0);
