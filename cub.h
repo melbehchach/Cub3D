@@ -10,9 +10,9 @@
 #include "./minilibx/mlx.h"
 #include "./get_next_line/get_next_line.h"
 
-#define WIN_WIDTH
-#define WIN_HEIGHT
-
+#define WIN_WIDTH 900
+#define WIN_HEIGHT 600
+#define RED 0xFF0000
 
 typedef struct s_parse
 {
@@ -27,6 +27,21 @@ typedef struct s_parse
 	int		player;
 	int		fd;
 }t_parse;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}t_img;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}	t_data;
 
 // typedef struct s_data
 // {
@@ -63,4 +78,10 @@ int		check_player(t_parse *obj);
 int		check_map(t_parse *obj);
 int		parse(char *file);
 
+
+
+/****************************************************/
+/*				DRAW FUNCTIONS						*/
+/****************************************************/
+void	draw(void);
 #endif

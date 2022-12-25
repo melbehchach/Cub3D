@@ -10,5 +10,6 @@ int main(int ac, char **av)
 		return (0);
 	}
 	parse(av[1]);
+	draw();
 	return (0);
 }
