@@ -9,7 +9,7 @@ int main(int ac, char **av)
 		printf("Error\nWrong file ! Please try again with another file.\n");
 		return (0);
 	}
-	parse(av[1]);
+	// parse(av[1]);
 	draw();
 	return (0);
 }

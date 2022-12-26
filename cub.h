@@ -13,6 +13,7 @@
 #define WIN_WIDTH 900
 #define WIN_HEIGHT 600
 #define RED 0xFF0000
+#define TILE_SIZE 32
 
 typedef struct s_parse
 {
@@ -27,6 +28,15 @@ typedef struct s_parse
 	int		player;
 	int		fd;
 }t_parse;
+
+typedef struct s_wall
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+	int	color;
+}t_wall;
 
 typedef struct s_img
 {
@@ -43,12 +53,6 @@ typedef struct s_data
 	void	*win_ptr;
 }	t_data;
 
-// typedef struct s_data
-// {
-// 	void *mlx_ptr;
-// 	void *mlx_win;
-
-// }t_data;
 
 
 /****************************************************/
@@ -83,5 +87,9 @@ int		parse(char *file);
 /****************************************************/
 /*				DRAW FUNCTIONS						*/
 /****************************************************/
+
+// void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	draw(void);
+
+
 #endif
