@@ -10,8 +10,8 @@
 #include "./minilibx/mlx.h"
 #include "./get_next_line/get_next_line.h"
 
-#define WIN_WIDTH 900
-#define WIN_HEIGHT 600
+#define WIN_WIDTH 1050
+#define WIN_HEIGHT 900
 #define RED 0xFF0000
 #define TILE_SIZE 32
 
@@ -28,6 +28,15 @@ typedef struct s_parse
 	int		player;
 	int		fd;
 }t_parse;
+
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int width;
+	int height;
+	int color;
+}	t_rect;
 
 typedef struct s_wall
 {
@@ -80,7 +89,7 @@ int 	check_direction_elements(t_parse *obj);
 int		borders_checker(int nb_line, t_parse *obj);
 int		check_player(t_parse *obj);
 int		check_map(t_parse *obj);
-int		parse(char *file);
+t_parse		parse(char *file);
 
 
 
@@ -89,7 +98,7 @@ int		parse(char *file);
 /****************************************************/
 
 // void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	draw(void);
+void	draw(t_parse *obj);
 
 
 #endif

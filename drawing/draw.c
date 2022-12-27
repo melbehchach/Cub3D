@@ -8,43 +8,61 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	render_background(t_img *img, int color)
+int render_rect(t_img *img, t_rect *rect)
 {
+	int	i;
+	int j;
+
+	i = rect->y;
+	while (i < (rect->y + rect->height))
+	{
+		j = rect->x;
+		while (j < (rect->x + rect->width))
+			my_mlx_pixel_put(img, j++, i, rect->color);
+		++i;
+	}
+	return (0);
+}
+
+void	draw_map(t_img *img, t_parse *arr)
+{
+	t_rect	rect;
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < WIN_HEIGHT)
+	i = 6;
+	rect.height = TILE_SIZE;
+	rect.width = TILE_SIZE;
+	while (arr->content[i])
 	{
 		j = 0;
-		while (j < WIN_WIDTH)
-			mlx_pixel_put(img->mlx_ptr, img->win_ptr, j++, i, color);
-		++i;
+		while (arr->content[i][j])
+		{
+			rect.y = i * TILE_SIZE;
+			rect.x = j * TILE_SIZE;
+			if (arr->content[i][j] == '1')
+				rect.color = 16777215;
+			else
+				rect.color = 1323670;
+			render_rect(img, &rect);
+			j++;
+		}
+		printf("%d\n", j);
+		i++;
 	}
+	printf("%d\n", i);
 }
 
-void	draw(void)
+void	draw(t_parse *arr)
 {
 	t_img	img;
 	t_data	obj;
-	// int i;
-	// int j;
 
 	obj.mlx_ptr = mlx_init();
 	obj.win_ptr = mlx_new_window(obj.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "CUB_3D");
 	img.mlx_img = mlx_new_image(obj.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
-	// i = 0;
-	// while (i < (WIN_WIDTH))
-	// {
-	// 	j = 0;
-	// 	while (j < (WIN_HEIGHT / 2))
-	// 	{
-	// 		my_mlx_pixel_put(&img, i, j, 9180260);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	draw_map(&img, arr);
 	mlx_put_image_to_window(obj.mlx_ptr, obj.win_ptr, img.mlx_img, 0, 0);
 	mlx_loop(obj.mlx_ptr);
 	mlx_destroy_window(obj.mlx_ptr, obj.win_ptr);
