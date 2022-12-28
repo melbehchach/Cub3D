@@ -14,6 +14,10 @@
 #define WIN_HEIGHT 900
 #define RED 0xFF0000
 #define TILE_SIZE 32
+#define NORTH 270
+#define South 180
+#define WEST 270
+#define EAST 90
 
 typedef struct s_parse
 {
@@ -37,6 +41,13 @@ typedef struct s_rect
 	int height;
 	int color;
 }	t_rect;
+
+// typedef	struct s_player
+// {
+// 	int	posx;
+// 	int	posy;
+	
+// }
 
 typedef struct s_wall
 {

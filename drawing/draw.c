@@ -41,17 +41,52 @@ void	draw_map(t_img *img, t_parse *arr)
 			rect.y = i * TILE_SIZE;
 			rect.x = j * TILE_SIZE;
 			if (arr->content[i][j] == '1')
+			{
 				rect.color = 16777215;
-			else
+				rect.height = TILE_SIZE;
+				rect.width = TILE_SIZE;
+			}
+			else if (arr->content[i][j] == '0')
+			{
 				rect.color = 1323670;
+				rect.height = TILE_SIZE;
+				rect.width = TILE_SIZE;
+			}
 			render_rect(img, &rect);
+			if (arr->content[i][j] == 'N')
+			{
+				rect.color = RED;
+				rect.height = TILE_SIZE / 4;
+				rect.width = TILE_SIZE / 4;
+				render_rect(img, &rect);
+			}
 			j++;
 		}
-		printf("%d\n", j);
 		i++;
 	}
-	printf("%d\n", i);
 }
+
+int	escape_button_exit(int keysym, t_data *data)
+{
+	if (keysym == 53)
+	{
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		exit(0);
+	}
+	return (0);
+}
+
+int	red_button_exit(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	exit(0);
+	return (0);
+}
+
+// int	key_presse()
+// {
+
+// }
 
 void	draw(t_parse *arr)
 {
@@ -62,6 +97,8 @@ void	draw(t_parse *arr)
 	obj.win_ptr = mlx_new_window(obj.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "CUB_3D");
 	img.mlx_img = mlx_new_image(obj.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
+	mlx_hook(obj.win_ptr, 2, 0, &escape_button_exit, &obj);
+	mlx_hook(obj.win_ptr, 17, 0, &red_button_exit, &obj);
 	draw_map(&img, arr);
 	mlx_put_image_to_window(obj.mlx_ptr, obj.win_ptr, img.mlx_img, 0, 0);
 	mlx_loop(obj.mlx_ptr);
