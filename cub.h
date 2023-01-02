@@ -10,10 +10,13 @@
 #include "./minilibx/mlx.h"
 #include "./get_next_line/get_next_line.h"
 
-#define WIN_WIDTH 1050
+#define WIN_WIDTH 1700
 #define WIN_HEIGHT 900
 #define RED 0xFF0000
-#define TILE_SIZE 32
+#define BLACK 000000
+#define WHITE 14474440
+#define BLEU 3289700
+#define TILE_SIZE 51
 #define NORTH 270
 #define South 180
 #define WEST 270
@@ -35,19 +38,19 @@ typedef struct s_parse
 
 typedef struct s_rect
 {
-	int	x;
-	int	y;
-	int width;
-	int height;
-	int color;
+	double	x;
+	double	y;
+	int		width;
+	int		height;
+	int		color;
 }	t_rect;
 
-// typedef	struct s_player
-// {
-// 	int	posx;
-// 	int	posy;
-	
-// }
+typedef	struct s_player
+{
+	double	posx;
+	double	posy;
+	double	walkDirection;
+}t_player;
 
 typedef struct s_wall
 {
