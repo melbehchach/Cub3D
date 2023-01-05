@@ -28,40 +28,6 @@ static int render_rect(t_img *img,  t_rect *rect)
 	return (0);
 }
 
-int render_rect_player(t_img *img,  t_rect *rect)
-{
-	int	i;
-	int j;
-	
-	i = rect->y;
-    rect->height = TILE_SIZE / 4;
-    rect->width = TILE_SIZE / 4;
-	while (i < (rect->y + rect->height))
-	{
-		j = rect->x;
-		while (j < (rect->x + rect->width))
-			my_mlx_pixel_put(img, j++, i, RED);
-		++i;
-	}
-	return (0);
-}
-
-
-int render_line(t_img *img, double x, double y)
-{
-    int i;
-
-    i = 0;
-    while (i < TILE_SIZE)
-    {
-        my_mlx_pixel_put(img, x, y, RED);
-        x++;
-        y++;
-        i++;
-    }
-    return (0);
-}
-
 int render_rotation_line(t_img *img, double x, double y, double angle)
 {
     int i;
@@ -75,29 +41,6 @@ int render_rotation_line(t_img *img, double x, double y, double angle)
         i++;
     }
     return (0);
-}
-
-void render_player(t_img *img, t_parse *array)
-{
-	t_rect	rect;
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	k = 5;
-	while (array->content[++k])
-	{
-		j = -1;
-		while (array->content[k][++j])
-		{
-			rect.x = (j * TILE_SIZE) + (TILE_SIZE / 2);
-			rect.y = (i * TILE_SIZE) + (TILE_SIZE / 2);
-			if (array->content[k][j] == 'N')
-				render_rect_player(img, &rect);
-		}
-		i++;
-	}
 }
 
 void	render_map(t_img *img, t_parse *array)

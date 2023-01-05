@@ -9,7 +9,8 @@ SRC = ./main.c \
 		./parser/direction_elements.c \
 		./parser/map_parser.c \
 		./parser/map_parser2.c \
-		./drawing/map_render.c \
+		./drawing/positions_calculus.c \
+		./drawing/map_player_render.c \
 		./drawing/draw.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \

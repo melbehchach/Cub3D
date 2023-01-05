@@ -37,6 +37,7 @@ typedef struct s_rect
 {
 	double	x;
 	double	y;
+	char	direction;
 	int		width;
 	int		height;
 	int		color;
@@ -50,6 +51,7 @@ typedef	struct s_player
 	double	turnDirection;
 	double	rotationAngle;
 	double	moveSpeed;
+	double	moveStep;
 	double	rotationSpeed;
 }t_player;
 
@@ -100,10 +102,11 @@ t_parse		parse(char *file);
 /****************************************************/
 /*				DRAW FUNCTIONS						*/
 /****************************************************/
-int render_rotation_line(t_img *img, double x, double y, double angle);
-int		render_line(t_img *img, double x, double y);
-int		render_rect_player(t_img *img,  t_rect *rect);
-void	render_player(t_img *img, t_parse *array);
+void	initiate_player_vars(t_data *obj, t_player *player);
+t_rect	player_initial_postion(t_parse *array);
+int		press_hook(int key, t_data *obj);
+int		release_hook(int key, t_data *obj);
+int		render_rotation_line(t_img *img, double x, double y, double angle);
 void	render_map(t_img *img, t_parse *array);
 void	draw(t_data *obj);
 
