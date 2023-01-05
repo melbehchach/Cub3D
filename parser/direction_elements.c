@@ -55,11 +55,11 @@ int check_direction_elements(t_parse *obj)
 	counter = 0;
 	while (obj->index < 6)
 	{
-		if (check_direction_name(obj->content[obj->index]))
+		if (check_direction_name(obj->content[obj->index]) == 1)
 			counter++;
 		obj->index++;
 	}
 	if (counter != 6 || check_duplicated(obj) != 1)
-		return (1);
+		return (3);
 	return (0);
 }

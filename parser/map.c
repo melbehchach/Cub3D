@@ -60,18 +60,18 @@ static void	fill_map_array(t_parse *obj)
 int	create_content_array(t_parse *obj, char *file)
 {
 	if (lines_counter(obj, file) < 0)
-		return (-1);
+		return (2);
 	obj->fd = open_file(file);
 	if (obj->fd < 0)
-		return (-1);
+		return (2);
 	if (obj->size <= 0)
 	{
 		printf("Error\nOops empty file !\n");
-		exit(1);
+		return (2);
 	}
 	obj->content = create_2d_array(obj->size);
 	if (!obj->content)
-		return (-1);
+		return (2);
 	fill_map_array(obj);
 	close(obj->fd);
 	return (0);
