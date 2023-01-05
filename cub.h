@@ -10,9 +10,9 @@
 #include "./minilibx/mlx.h"
 #include "./get_next_line/get_next_line.h"
 
-# define WIN_WIDTH 1700
+# define WIN_WIDTH 1280
 # define WIN_HEIGHT 900
-# define TILE_SIZE 36
+# define TILE_SIZE 24
 # define PI 3.14159265359
 # define RED 14423572
 # define WHITE 14474440
@@ -27,6 +27,7 @@ typedef struct s_parse
 	char	*line;
 	int		size;
 	int		nb_line;
+	int		nb_rows;
 	int		length;
 	int		index;
 	int		player;
@@ -64,6 +65,49 @@ typedef struct s_img
 	int		endian;
 }t_img;
 
+typedef struct s_dda
+{
+	double	dx;
+	double	dy;
+	double	step;
+	double	xinc;
+	double	yinc;
+}	t_dda;
+
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+	char	direction;
+	double	tmpx;
+	double	tmpy;
+}	t_pos;
+
+typedef struct s_ray
+{
+	double	yintercept;
+	double	xintercept;
+	double	ystep;
+	double	xstep;
+	char	direction;
+	int		is_up;
+	int		is_down;
+	int		is_right;
+	int		is_left;
+}	t_ray;
+
+typedef struct s_dataray
+{
+	double	x;
+	double	y;
+	double	distance;
+	double	angle;
+	char	direction;
+	int		type;
+	double	tmpx;
+	double	tmpy;
+}	t_dataray;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -73,6 +117,7 @@ typedef struct s_data
 	t_player	player;
 	t_rect		rect;
 	int			key;
+	t_dataray	*ray;
 }	t_data;
 
 /****************************************************/
@@ -109,6 +154,12 @@ int		release_hook(int key, t_data *obj);
 int		render_rotation_line(t_img *img, double x, double y, double angle);
 void	render_map(t_img *img, t_parse *array);
 void	draw(t_data *obj);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
+int	cast_rays(t_data *map);
+t_pos	castray(t_data *map, double rayangle, int i, int flag);
+int	find_wall_hit(t_pos *pos, t_ray ray, t_data *map);
+t_pos	get_vertical_intersect(t_data *map, double rayangle);
+t_pos	get_horizontal_intersect(t_data *map, double rayangle);
 
 #endif
