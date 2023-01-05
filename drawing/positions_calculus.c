@@ -59,9 +59,9 @@ int  press_hook(int key, t_data *obj)
     else if (key == 1)
         obj->player.walkDirection = -1;
     else if (key == 2)
-        obj->player.walkDirection = 1;
-    else if (key == 0)
         obj->player.walkDirection = -1;
+    else if (key == 0)
+        obj->player.walkDirection = 1;
     else if (key == 124)
         obj->player.turnDirection = 1;
     else if (key == 123)

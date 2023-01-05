@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra -g
 NAME_M = cub
 HEADER = ./cub.h
 SRC = ./main.c \
@@ -14,6 +14,7 @@ SRC = ./main.c \
 		./drawing/draw.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \
+		./drawing/raycasting.c
 
 OBJ = $(SRC:.c=.o)
 

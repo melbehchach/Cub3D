@@ -9,8 +9,9 @@ static int  close_red_button(t_data *obj)
 
 static int re_render(t_data *obj)
 {
-    mlx_destroy_image(obj->mlx_ptr, obj->img.mlx_img);
-    obj->img.mlx_img = mlx_new_image(obj->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+    // mlx_destroy_image(obj->mlx_ptr, obj->img.mlx_img);
+    // obj->img.mlx_img = mlx_new_image(obj->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+    obj->img.addr = mlx_get_data_addr(obj->img.mlx_img, &obj->img.bpp, &obj->img.line_len, &obj->img.endian);
     obj->player.rotationAngle += obj->player.rotationSpeed * obj->player.turnDirection;
     obj->player.moveStep = obj->player.walkDirection * obj->player.moveSpeed;
     if (obj->key == 13 || obj->key == 1)
@@ -26,7 +27,8 @@ static int re_render(t_data *obj)
     obj->rect.x = obj->player.posx;
     obj->rect.y = obj->player.posy;
     render_map(&obj->img, &obj->parser);
-    render_rotation_line(&obj->img, obj->rect.x, obj->rect.y, obj->player.rotationAngle);
+    // render_rotation_line(&obj->img, obj->rect.x, obj->rect.y, obj->player.rotationAngle);
+    cast_rays(obj);
     mlx_put_image_to_window(obj->mlx_ptr, obj->win_ptr, obj->img.mlx_img, 0, 0);
     return(0);
 }
