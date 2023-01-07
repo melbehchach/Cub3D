@@ -33,6 +33,7 @@ typedef struct s_parse
 	int		index;
 	int		player;
 	int		fd;
+	
 }t_parse;
 
 typedef struct s_rect
@@ -95,7 +96,16 @@ typedef struct s_ray
 	int		is_down;
 	int		is_right;
 	int		is_left;
-}	t_ray;
+}t_ray;
+
+typedef struct s_texture
+{
+    t_img	*img;
+    char	*path;
+    int		width;
+    int		height;
+    char	direction;
+}t_texture;
 
 typedef struct s_dataray
 {
@@ -107,7 +117,7 @@ typedef struct s_dataray
 	int		type;
 	double	tmpx;
 	double	tmpy;
-}	t_dataray;
+}t_dataray;
 
 typedef struct s_data
 {
@@ -116,10 +126,11 @@ typedef struct s_data
 	int			key;
 	t_img		img;
 	t_parse		parser;
+	t_texture	*texture;
 	t_player	player;
 	t_rect		rect;
 	t_dataray	*ray;
-}	t_data;
+}t_data;
 
 /****************************************************/
 /*				UTIL FUNCTIONS						*/
