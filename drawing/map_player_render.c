@@ -57,10 +57,10 @@ void	render_map(t_img *img, t_parse *array)
 		j = -1;
 		while (array->content[k][++j])
 		{
-			rect.x = j * TILE_SIZE;
-			rect.y = i * TILE_SIZE;
-			rect.height = TILE_SIZE;
-			rect.width = TILE_SIZE;
+			rect.x = j * TILE_SIZE * 0.2;
+			rect.y = i * TILE_SIZE * 0.2;
+			rect.height = TILE_SIZE * 0.2;
+			rect.width = TILE_SIZE * 0.2;
 			if (array->content[k][j] == '1')
 				rect.color = 14474440;
 			else if (array->content[k][j] == '0')

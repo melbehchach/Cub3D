@@ -12,8 +12,9 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 900
-# define TILE_SIZE 24
+# define TILE_SIZE 40
 # define PI 3.14159265359
+# define WALL_STRIP_WIDTH 1
 # define RED 14423572
 # define WHITE 14474440
 # define BLEU 3289700
@@ -112,11 +113,11 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	int			key;
 	t_img		img;
 	t_parse		parser;
 	t_player	player;
 	t_rect		rect;
-	int			key;
 	t_dataray	*ray;
 }	t_data;
 
@@ -161,5 +162,6 @@ t_pos	castray(t_data *map, double rayangle, int i, int flag);
 int	find_wall_hit(t_pos *pos, t_ray ray, t_data *map);
 t_pos	get_vertical_intersect(t_data *map, double rayangle);
 t_pos	get_horizontal_intersect(t_data *map, double rayangle);
+void    render_walls(t_data *obj, int nb_ray);
 
 #endif

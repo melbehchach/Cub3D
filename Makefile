@@ -4,6 +4,8 @@ NAME_M = cub
 HEADER = ./cub.h
 SRC = ./main.c \
 		./util_functions.c \
+		./get_next_line/get_next_line.c \
+		./get_next_line/get_next_line_utils.c \
 		./parser/parse.c \
 		./parser/map.c \
 		./parser/direction_elements.c \
@@ -11,10 +13,9 @@ SRC = ./main.c \
 		./parser/map_parser2.c \
 		./drawing/positions_calculus.c \
 		./drawing/map_player_render.c \
-		./drawing/draw.c \
-		./get_next_line/get_next_line.c \
-		./get_next_line/get_next_line_utils.c \
-		./drawing/raycasting.c
+		./drawing/render3Dwall.c \
+		./drawing/raycasting.c \
+		./drawing/draw.c
 
 OBJ = $(SRC:.c=.o)
 
