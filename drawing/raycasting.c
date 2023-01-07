@@ -24,16 +24,6 @@ void	set_pos(t_pos *pos, t_ray ray)
 		pos->tmpx--;
 }
 
-// int	check_for_wall(t_data *map, t_pos *pos)
-// {
-//     // printf("tmpx: %f - tmpy: %f\n", pos->tmpx, pos->tmpy);
-//     // printf("->> %c\n", map->parser.content[(int)pos->tmpy / TILE_SIZE + 6][(int)pos->tmpx / TILE_SIZE]);
-// 	if (map->parser.content[(int)pos->tmpy / TILE_SIZE + 6]
-// 			[(int)pos->tmpx / TILE_SIZE] == '1')
-// 		        return (1);
-// 	return (0);
-// }
-
 double	normalize_angle(double angle)
 {
 	if (angle > 2 * PI)
@@ -99,7 +89,7 @@ static  void rows_lines(t_parse *parser)
 void	drawline(t_data *map, double x0, double y0)
 {
 	t_dda	dda;
-	int		i;
+	// int		i;
 
 	dda.dx = map->player.posx - x0;
 	dda.dy = map->player.posy - y0;
@@ -109,29 +99,16 @@ void	drawline(t_data *map, double x0, double y0)
 		dda.step = fabs(dda.dy);
 	dda.xinc = dda.dx / dda.step;
 	dda.yinc = dda.dy / dda.step;
-	i = 0;
-	while (++i <= dda.step)
-	{
-		my_mlx_pixel_put(&map->img, x0, y0, 0xFF0000);
-		x0 += dda.xinc;
-		y0 += dda.yinc;
-	}
+	// i = 0;
+	// while (++i <= dda.step)
+	// {
+	// 	my_mlx_pixel_put(&map->img, x0, y0, 0xFF0000);
+	// 	x0 += dda.xinc;
+	// 	y0 += dda.yinc;
+	// }
 }
 
 ///////////////////////////////////////////////////////
-
-// int	cast_rays(t_data *map)
-// {
-// 	double	rayangle;
-
-// 	rayangle = map->player.rotationAngle;
-// 	map->ray = (t_dataray *)malloc(sizeof(t_dataray) * 2);
-// 	if (!map->ray)
-//         exit(1);
-//     castray(map, normalize_angle(rayangle), 0, 1);
-//     drawline(map, map->ray[0].x, map->ray[0].y);
-// 	return (0);
-// }
 
 int	cast_rays(t_data *map)
 {
@@ -151,6 +128,7 @@ int	cast_rays(t_data *map)
         drawline(map, map->ray[rays].x, map->ray[rays].y);
 		rayangle += fov / WIN_WIDTH;
 	}
+	render_walls(map, rays);
 	return (0);
 }
 
@@ -160,14 +138,9 @@ t_pos	castray(t_data *map, double rayangle, int i, int flag)
 	t_pos	v_pos;
 	t_pos	pos;
 
-    // printf("1 ---- rayangle : %f\n", rayangle);
-
 	h_pos = get_horizontal_intersect(map, rayangle);
-    // printf("2 ---- rayangle : %f\n", rayangle);
 	v_pos = get_vertical_intersect(map, rayangle);
-    // printf("3 ---- rayangle : %f\n", rayangle);
 	pos = get_shortest_dist(map, h_pos, v_pos);
-    // printf("4 ---- rayangle : %f\n", rayangle);
 	if (flag == 1)
 	{
 		map->ray[i].distance = distance(map->player.posx, map->player.posy, pos.x, pos.y)
@@ -182,15 +155,11 @@ t_pos	castray(t_data *map, double rayangle, int i, int flag)
 		else
 			map->ray[i].direction = 'V';
 	}
-    // printf("%c\n\n", map->ray[i].direction);
 	return (pos);
 }
 
 int	check_for_wall(t_data *map, t_pos *pos)
 {
-    // printf("tmpx: %f - tmpy: %f\n", pos->tmpx, pos->tmpy);
-    // printf("->> %c\n", map->parser.content[(int)pos->tmpy / TILE_SIZE + 6][(int)pos->tmpx / TILE_SIZE]);
-    // puts(map->parser.content[(int)(pos->tmpy / TILE_SIZE) + 6]);
     if (map->parser.content[(int)pos->tmpy / TILE_SIZE + 6][(int)pos->tmpx / TILE_SIZE] == '1')
 		    return (1);
 	return (0);
@@ -198,32 +167,20 @@ int	check_for_wall(t_data *map, t_pos *pos)
 
 int	find_wall_hit(t_pos *pos, t_ray ray, t_data *map)
 {
-    // printf("rows: %d | lines: %d\n", map->parser.nb_rows, map->parser.nb_line);
-    // printf("start fiind wall hit\n");
     rows_lines(&map->parser);
-    // printf("%d\n", map->parser.nb_line);
-    // printf("before loop\n");
 	while (69)
 	{
-        // printf("start loop\n");
 		set_pos(pos, ray);
-        // printf("x: %f | y: %f\n", pos->tmpx / TILE_SIZE, pos->tmpy / TILE_SIZE);
-        // printf("cond 1\n");
-        // printf("%d\n", (int)(pos->tmp / TILE_SIZE) + 6);
 		if ((pos->tmpy / TILE_SIZE) > map->parser.nb_line
 			|| pos->tmpy < 0
             || pos->tmpx > (ft_strlen(map->parser.content[(int)(pos->tmpy / TILE_SIZE) + 6]) - 1) * TILE_SIZE
 			|| pos->tmpx < 0)
 			return (0);
-        // puts("down");
-        // puts(map->parser.content[(int)(pos->tmpy / TILE_SIZE) + 6]);
-        // printf("cond 2\n");
 		if (check_for_wall(map, pos))
 			return (0);
 		ray.xintercept += ray.xstep;
 		ray.yintercept += ray.ystep;
 	}
-    // printf("end fiind wall hit\n");
 	return (0);
 }
 
