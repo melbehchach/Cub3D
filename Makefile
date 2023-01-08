@@ -3,6 +3,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 NAME_M = cub
 HEADER = ./cub.h
 SRC = ./main.c \
+		wall_textures.c \
 		./util_functions.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \

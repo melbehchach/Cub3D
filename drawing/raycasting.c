@@ -89,7 +89,7 @@ static  void rows_lines(t_parse *parser)
 void	drawline(t_data *map, double x0, double y0)
 {
 	t_dda	dda;
-	// int		i;
+	int		i;
 
 	dda.dx = map->player.posx - x0;
 	dda.dy = map->player.posy - y0;
@@ -99,13 +99,13 @@ void	drawline(t_data *map, double x0, double y0)
 		dda.step = fabs(dda.dy);
 	dda.xinc = dda.dx / dda.step;
 	dda.yinc = dda.dy / dda.step;
-	// i = 0;
-	// while (++i <= dda.step)
-	// {
-	// 	my_mlx_pixel_put(&map->img, x0, y0, 0xFF0000);
-	// 	x0 += dda.xinc;
-	// 	y0 += dda.yinc;
-	// }
+	i = 0;
+	while (++i <= dda.step)
+	{
+		my_mlx_pixel_put(&map->img, x0 * 0.2, y0 * 0.2, 0xFF0000);
+		x0 += dda.xinc;
+		y0 += dda.yinc;
+	}
 }
 
 ///////////////////////////////////////////////////////
@@ -128,7 +128,9 @@ int	cast_rays(t_data *map)
         drawline(map, map->ray[rays].x, map->ray[rays].y);
 		rayangle += fov / WIN_WIDTH;
 	}
+	create_texture(map);
 	render_walls(map, rays);
+    render_map(&map->img, &map->parser);
 	return (0);
 }
 

@@ -26,11 +26,8 @@ static int re_render(t_data *obj)
     }
     obj->rect.x = obj->player.posx;
     obj->rect.y = obj->player.posy;
-    render_map(&obj->img, &obj->parser);
     cast_rays(obj);
-    render_map(&obj->img, &obj->parser);
     mlx_put_image_to_window(obj->mlx_ptr, obj->win_ptr, obj->img.mlx_img, 0, 0);
-
     return(0);
 }
 

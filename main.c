@@ -16,7 +16,7 @@ static char	*get_textur_path(char **array, char *str)
 	path = malloc((sizeof(char) * length) + 1);
 	if (!path)
 		return (NULL);
-	ft_strlcpy(path, array[i], length);
+	ft_strlcpy(path, &array[i][3], length);
 	return (path);
 }
 
@@ -54,7 +54,6 @@ int main(int ac, char **av)
 	}
 	obj.parser = parse(av[1]);
 	fill_textur_array(&obj);
-	int i = -1;
 	draw(&obj);
 	return (0);
 }

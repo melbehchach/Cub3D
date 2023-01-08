@@ -100,7 +100,7 @@ typedef struct s_ray
 
 typedef struct s_texture
 {
-    t_img	*img;
+    t_img	img;
     char	*path;
     int		width;
     int		height;
@@ -168,11 +168,16 @@ void	render_map(t_img *img, t_parse *array);
 void	draw(t_data *obj);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
-int	cast_rays(t_data *map);
+
+t_texture	choose_texture(t_data *map, int ray_id);
+int		cast_rays(t_data *map);
 t_pos	castray(t_data *map, double rayangle, int i, int flag);
-int	find_wall_hit(t_pos *pos, t_ray ray, t_data *map);
+int		find_wall_hit(t_pos *pos, t_ray ray, t_data *map);
 t_pos	get_vertical_intersect(t_data *map, double rayangle);
 t_pos	get_horizontal_intersect(t_data *map, double rayangle);
 void    render_walls(t_data *obj, int nb_ray);
+int		get_texture(t_data *map, double y, int index, double wallheight);
+void	create_texture(t_data *map);
+
 
 #endif

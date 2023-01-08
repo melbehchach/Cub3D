@@ -10,9 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
-int	get_texture(t_map *map, double y, int index, double wallheight)
+t_texture	choose_texture(t_data *map, int ray_id)
+{
+	if (map->ray[ray_id].angle >= 0
+		&& map->ray[ray_id].angle <= M_PI
+		&& map->ray[ray_id].direction == 'H')
+		return (map->texture[0]);
+	else if ((map->ray[ray_id].angle < M_PI / 2
+			|| map->ray[ray_id].angle > 3 * M_PI / 2)
+		&& map->ray[ray_id].direction == 'V')
+		return (map->texture[1]);
+	else if (map->ray[ray_id].angle > M_PI / 2
+		&& map->ray[ray_id].angle < 3 * M_PI / 2
+		&& map->ray[ray_id].direction == 'V')
+		return (map->texture[2]);
+	else
+		return (map->texture[3]);
+}
+
+int	get_texture(t_data *map, double y, int index, double wallheight)
 {
 	double		offsetx;
 	double		offsety;
@@ -22,12 +40,12 @@ int	get_texture(t_map *map, double y, int index, double wallheight)
 
 	tex = choose_texture(map, index);
 	if (map->ray[index].direction == 'V')
-		offsetx = (map->ray[index].y / (double) TILESIZE);
+		offsetx = (map->ray[index].y / (double) TILE_SIZE);
 	else
-		offsetx = (map->ray[index].x / (double) TILESIZE);
+		offsetx = (map->ray[index].x / (double) TILE_SIZE);
 	offsetx -= (int) offsetx;
 	offsetx *= tex.width;
-	offsety = (y + (wallheight / 2 - HEIGHT / 2)) * (tex.height / wallheight);
+	offsety = (y + (wallheight / 2 - WIN_HEIGHT / 2)) * (tex.height / wallheight);
 	offsety = (int) offsety;
 	offsety *= tex.width;
 	buffer = (int *)tex.img.addr;
@@ -35,43 +53,25 @@ int	get_texture(t_map *map, double y, int index, double wallheight)
 	return (color);
 }
 
-t_texture	choose_texture(t_map *map, int ray_id)
-{
-	if (map->ray[ray_id].angle >= 0
-		&& map->ray[ray_id].angle <= M_PI
-		&& map->ray[ray_id].direction == 'H')
-		return (map->textures[0]);
-	else if ((map->ray[ray_id].angle < M_PI / 2
-			|| map->ray[ray_id].angle > 3 * M_PI / 2)
-		&& map->ray[ray_id].direction == 'V')
-		return (map->textures[1]);
-	else if (map->ray[ray_id].angle > M_PI / 2
-		&& map->ray[ray_id].angle < 3 * M_PI / 2
-		&& map->ray[ray_id].direction == 'V')
-		return (map->textures[2]);
-	else
-		return (map->textures[3]);
-}
-
-void	create_texture(t_map *map)
+void	create_texture(t_data *map)
 {
 	int	i;
 
 	i = -1;
-	while (++i < TEXTURES)
+	while (++i < 4)
 	{
-		map->textures[i].img.img = mlx_xpm_file_to_image(map->mlx_ptr,
-				map->textures[i].path,
-				&map->textures[i].width,
-				&map->textures[i].height);
-		if (!map->textures[i].img.img)
+		map->texture[i].img.mlx_img = mlx_xpm_file_to_image(map->mlx_ptr,
+				map->texture[i].path,
+				&map->texture[i].width,
+				&map->texture[i].height);
+		if (!map->texture[i].img.mlx_img)
 		{
-			printf("Error Reading. textures\n GAME CLOSED\n");
+			printf("Error Reading. texture\n GAME CLOSED\n");
 			exit(EXIT_FAILURE);
 		}
-		map->textures[i].img.addr = mlx_get_data_addr(map->textures[i].img.img,
-				&map->textures[i].img.bits_per_pixel,
-				&map->textures[i].img.line_length,
-				&map->textures[i].img.endian);
+		map->texture[i].img.addr = mlx_get_data_addr(map->texture[i].img.mlx_img,
+				&map->texture[i].img.bpp,
+				&map->texture[i].img.line_len,
+				&map->texture[i].img.endian);
 	}
 }
