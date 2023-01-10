@@ -22,9 +22,9 @@
 # include "./minilibx/mlx.h"
 # include "./get_next_line/get_next_line.h"
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
-# define TILE_SIZE 20
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 720
+# define TILE_SIZE 10
 # define PI 3.14159
 # define WALL_STRIP_WIDTH 1
 # define RED 14423572

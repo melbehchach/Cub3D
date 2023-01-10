@@ -57,9 +57,9 @@ void	initiate_player_vars(t_data *obj, t_player *player)
 		player->rotationangle = 0;
 	else if (obj->rect.direction == 'W')
 		player->rotationangle = PI;
-	player->movespeed = 5.0;
+	player->movespeed = 3.0;
 	player->movestep = 0;
-	player->rotationspeed = 5.0 * (PI / 180);
+	player->rotationspeed = 3.0 * (PI / 180);
 }
 
 int	press_hook(int key, t_data *obj)

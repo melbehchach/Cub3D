@@ -56,10 +56,10 @@ static int	re_render(t_data *obj)
 	if (map[y ][x] == '0' || map[y][x] == 'N')// || map[y][x] == 'S'
 		// || map[y][x] == 'W' || map[y][x] == 'E')
 		obj->ply.posx = newx;
-	obj->rect.x = obj->ply.posx;
-	obj->rect.y = obj->ply.posy;
 	cast_rays(obj);
 	render_map(&obj->img, &obj->parser);
+	obj->rect.x = obj->ply.posx;
+	obj->rect.y = obj->ply.posy;
 	render_player(&obj->img, &obj->rect);
 	mlx_put_image_to_window(obj->mlx_ptr, obj->win_ptr, obj->img.mlx_img, 0, 0);
 	return (0);

@@ -60,8 +60,8 @@ int render_player(t_img *img,  t_rect *rect)
 	double j;
 	rect->height = TILE_SIZE / 2;
 	rect->width = TILE_SIZE / 2;
-	i = (rect->y + (TILE_SIZE * 0.2));
-	while (i < rect->y + rect->height)
+	i = (rect->y);
+	while (i < rect->y)
 	{
 		j = (rect->x + (TILE_SIZE * 0.2));
 		while (j < rect->x + rect->width)
@@ -78,7 +78,7 @@ void	render_map(t_img *img, t_parse *array)
 	int		j;
 	int		k;
 
-	i = 0;
+	i = 1;
 	k = 5;
 	while (++k < array->size)
 	{
@@ -86,10 +86,10 @@ void	render_map(t_img *img, t_parse *array)
 		array->length = ft_strlen(array->content[k]);
 		while (++j < array->length)
 		{
-			rect.x = j * (TILE_SIZE * 0.1);
-			rect.y = i * (TILE_SIZE * 0.1);
-			rect.height = TILE_SIZE * 0.1;
-			rect.width = TILE_SIZE * 0.1;
+			rect.x = j * (TILE_SIZE * 0.2);
+			rect.y = i * (TILE_SIZE * 0.2);
+			rect.height = TILE_SIZE;
+			rect.width = TILE_SIZE;
 			if (array->content[k][j] == '1')
 				rect.color = WHITE;
 			if (array->content[k][j] == '0')

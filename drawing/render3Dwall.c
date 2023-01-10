@@ -54,6 +54,4 @@ void	render_walls(t_data *obj, int nb_ray)
 		render_floor(&obj->img, i, (obj->rect.y + obj->wallheight));
 		render_3d(obj, &obj->img, i, obj->tmp);
 	}
-	// render_player(&obj->img, &obj->rect);
-	// render_map(&obj->img, &obj->parser);
 }
