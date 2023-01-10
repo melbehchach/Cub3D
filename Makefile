@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 NAME_M = cub
 HEADER = ./cub.h
 SRC = ./main.c \
-		wall_textures.c \
+		./wall_textures.c \
 		./util_functions.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \
@@ -16,6 +16,8 @@ SRC = ./main.c \
 		./drawing/map_player_render.c \
 		./drawing/render3Dwall.c \
 		./drawing/raycasting.c \
+		./drawing/raycasting2.c \
+		./drawing/raycasting3.c \
 		./drawing/draw.c
 
 OBJ = $(SRC:.c=.o)

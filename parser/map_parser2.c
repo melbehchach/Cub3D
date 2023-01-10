@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parser2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-behc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/10 12:58:38 by mel-behc          #+#    #+#             */
+/*   Updated: 2023/01/10 13:02:32 by mel-behc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub.h"
 
 int	borders_checker(int nb_line, t_parse *obj)
@@ -33,11 +45,10 @@ int	detect_player(char *line)
 	return (0);
 }
 
-int check_player(t_parse *obj)
+int	check_player(t_parse *obj)
 {
 	obj->player = 0;
 	obj->index = 6;
-	// printf("size == %d\n", obj->size);
 	while (obj->index < obj->size)
 	{
 		if (detect_player(obj->content[obj->index]) == 1)

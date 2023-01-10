@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-behc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/10 16:02:08 by mel-behc          #+#    #+#             */
+/*   Updated: 2023/01/10 16:03:02 by mel-behc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 static char	*get_textur_path(char **array, char *str)
@@ -13,7 +25,7 @@ static char	*get_textur_path(char **array, char *str)
 		while (array[i][++j] == 32)
 			j++;
 		if (ft_strncmp(&array[i][j], str, 2) == 0)
-			break;
+			break ;
 	}
 	path = ft_strchr(&array[i][j], '.');
 	return (path);
@@ -26,7 +38,7 @@ static void	fill_textur_array(t_data *obj)
 	i = -1;
 	obj->texture = (t_texture *)malloc((sizeof(t_texture) * 4));
 	if (!obj->texture)
-		return;
+		return ;
 	while (++i < 6)
 	{
 		if (i == 0)
@@ -40,9 +52,9 @@ static void	fill_textur_array(t_data *obj)
 	}
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data obj;
+	t_data	obj;
 
 	if (ac != 2)
 		return (0);

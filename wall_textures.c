@@ -6,7 +6,7 @@
 /*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 10:21:57 by ilahyani          #+#    #+#             */
-/*   Updated: 2022/10/31 22:20:55 by ilahyani         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:15:53 by mel-behc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	get_texture(t_data *map, double y, int index, double wallheight)
 		offsetx = (map->ray[index].x / (double) TILE_SIZE);
 	offsetx -= (int) offsetx;
 	offsetx *= tex.width;
-	offsety = (y + (wallheight / 2 - WIN_HEIGHT / 2)) * (tex.height / wallheight);
+	offsety = (y + (wallheight / 2 - WIN_HEIGHT / 2))
+		* (tex.height / wallheight);
 	offsety = (int) offsety;
 	offsety *= tex.width;
 	buffer = (int *)tex.img.addr;
@@ -69,7 +70,8 @@ void	create_texture(t_data *map)
 			printf("Error Reading. texture\n GAME CLOSED\n");
 			exit(EXIT_FAILURE);
 		}
-		map->texture[i].img.addr = mlx_get_data_addr(map->texture[i].img.mlx_img,
+		map->texture[i].img.addr
+			= mlx_get_data_addr(map->texture[i].img.mlx_img,
 				&map->texture[i].img.bpp,
 				&map->texture[i].img.line_len,
 				&map->texture[i].img.endian);

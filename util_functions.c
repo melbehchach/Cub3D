@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util_functions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-behc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/10 16:15:57 by mel-behc          #+#    #+#             */
+/*   Updated: 2023/01/10 16:19:34 by mel-behc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
-void ft_puterrmsg(char *msg)
+void	ft_puterrmsg(char *msg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (msg[i])
@@ -63,36 +75,6 @@ char	*ft_strrchr(const char *s, int c)
 	return (NULL);
 }
 
-t_parse	*create_struct(void)
-{
-	t_parse *stc;
-
-	stc = malloc(sizeof(t_parse *));
-	if (!stc)
-		stc = NULL;
-	return (stc);
-}
-
-char	*create_array(int size)
-{
-	char	*tab;
-
-	tab = malloc((sizeof(char) * size));
-	if (!tab)
-		tab = NULL;
-	return (tab);
-}
-
-char	**create_2d_array(int size)
-{
-	char **tab;
-
-	tab = malloc((sizeof(char *) * size));
-	if(!tab)
-		tab = NULL;
-	return (tab);
-}
-
 int	file_name_checker(char *file)
 {
 	int	i;
@@ -108,20 +90,4 @@ int	file_name_checker(char *file)
 		i++;
 	}
 	return (0);
-}
-
-int	open_file(char *file)
-{
-	int fd;
-
-	fd = open(file, O_RDWR);
-	if (fd < 0)
-	{
-		printf("Error\n");
-		ft_puterrmsg(file);
-		ft_puterrmsg(": ");
-		perror("");
-		return (-1);
-	}
-	return (fd);
 }

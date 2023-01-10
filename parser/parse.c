@@ -1,4 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-behc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/10 12:58:46 by mel-behc          #+#    #+#             */
+/*   Updated: 2023/01/10 13:07:13 by mel-behc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub.h"
+
+int	open_file(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDWR);
+	if (fd < 0)
+	{
+		printf("Error\n");
+		ft_puterrmsg(file);
+		ft_puterrmsg(": ");
+		perror("");
+		return (-1);
+	}
+	return (fd);
+}
 
 static void	error_msg(int code)
 {
@@ -17,13 +45,14 @@ static void	error_msg(int code)
 
 t_parse	parse(char *file)
 {
-	t_parse obj;
+	t_parse	obj;
 
-	if(create_content_array(&obj, file) == 2)
+	if (create_content_array(&obj, file) == 2)
 		error_msg(2);
 	if (check_direction_elements(&obj) == 3)
 		error_msg(3);
-	if (borders_checker(6, &obj) == 4 || borders_checker((obj.size - 1), &obj) == 4)
+	if (borders_checker(6, &obj) == 4
+		|| borders_checker((obj.size - 1), &obj) == 4)
 		error_msg(4);
 	if (check_player(&obj) == 5)
 		error_msg(5);

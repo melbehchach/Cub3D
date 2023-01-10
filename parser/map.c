@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilahyani <ilahyani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-behc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 13:53:30 by mel-behc          #+#    #+#             */
-/*   Updated: 2023/01/05 21:09:19 by ilahyani         ###   ########.fr       */
+/*   Created: 2023/01/10 12:58:05 by mel-behc          #+#    #+#             */
+/*   Updated: 2023/01/10 13:01:38 by mel-behc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
-
-/*The use of obj->nb_line is to count all the lines occupied in the file */
-/*And for nb->size is to have the right size to allocate for the creation of an array that contains the content of the file*/
-/*The condition size > 6 to check if we have an empty line in the map*/
 
 static int	lines_counter(t_parse *obj, char *file)
 {
@@ -51,9 +47,10 @@ static void	fill_map_array(t_parse *obj)
 		obj->length = ft_strlen(obj->line);
 		if (obj->length > 1)
 		{
-			obj->content[obj->index] = (char *)malloc((sizeof(char) * obj->length) + 1);
+			obj->content[obj->index]
+				= (char *)malloc((sizeof(char) * obj->length) + 1);
 			if (!obj->content[obj->index])
-				return;
+				return ;
 			ft_strlcpy(obj->content[obj->index], obj->line, obj->length);
 			obj->index++;
 		}

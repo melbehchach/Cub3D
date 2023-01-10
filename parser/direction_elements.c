@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   direction_elements.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-behc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/10 12:57:51 by mel-behc          #+#    #+#             */
+/*   Updated: 2023/01/10 12:59:54 by mel-behc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub.h"
 
 static int	exetention_checker(char *path)
 {
-	char *extention;
+	char	*extention;
 
 	extention = ft_strrchr(path, 46);
 	if (ft_strncmp(extention, ".xpm", 4) == 0)
@@ -32,7 +44,7 @@ static int	check_direction_name(char *name)
 	return (0);
 }
 
-static int check_duplicated(t_parse *obj)
+static int	check_duplicated(t_parse *obj)
 {
 	int	i;
 	int	j;
@@ -52,7 +64,7 @@ static int check_duplicated(t_parse *obj)
 	return (1);
 }
 
-int check_direction_elements(t_parse *obj)
+int	check_direction_elements(t_parse *obj)
 {
 	int	counter;
 

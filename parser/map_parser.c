@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-behc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/10 12:58:24 by mel-behc          #+#    #+#             */
+/*   Updated: 2023/01/10 13:02:03 by mel-behc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub.h"
 
 static int	check_sides(char *line, int length)
@@ -40,7 +52,7 @@ static int	check_sides_of_zero(char *line, int length)
 	return (0);
 }
 
-static int check_top_bottom(char *line, char *line2, char *line3)
+static int	check_top_bottom(char *line, char *line2, char *line3)
 {
 	int	length;
 	int	i;

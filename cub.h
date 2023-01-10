@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-behc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/10 16:03:12 by mel-behc          #+#    #+#             */
+/*   Updated: 2023/01/10 16:14:17 by mel-behc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
-#define CUB_H
+# define CUB_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <fcntl.h>
-#include "./minilibx/mlx.h"
-#include "./get_next_line/get_next_line.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <math.h>
+# include <fcntl.h>
+# include "./minilibx/mlx.h"
+# include "./get_next_line/get_next_line.h"
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 860
-# define TILE_SIZE 10
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+# define TILE_SIZE 20
 # define PI 3.14159
 # define WALL_STRIP_WIDTH 1
 # define RED 14423572
@@ -34,7 +46,7 @@ typedef struct s_parse
 	int		index;
 	int		player;
 	int		fd;
-	
+
 }t_parse;
 
 typedef struct s_rect
@@ -47,16 +59,17 @@ typedef struct s_rect
 	int		color;
 }t_rect;
 
-typedef	struct s_player
+typedef struct s_player
 {
 	double	posx;
 	double	posy;
-	double	walkDirection;
-	double	turnDirection;
-	double	rotationAngle;
-	double	moveSpeed;
-	double	moveStep;
-	double	rotationSpeed;
+	double	walkdirection;
+	double	sidedirection;
+	double	turndirection;
+	double	rotationangle;
+	double	movespeed;
+	double	movestep;
+	double	rotationspeed;
 }t_player;
 
 typedef struct s_img
@@ -101,11 +114,11 @@ typedef struct s_ray
 
 typedef struct s_texture
 {
-    t_img	img;
-    char	*path;
-    int		width;
-    int		height;
-    char	direction;
+	t_img	img;
+	char	*path;
+	int		width;
+	int		height;
+	char	direction;
 }t_texture;
 
 typedef struct s_dataray
@@ -128,22 +141,27 @@ typedef struct s_data
 	t_img		img;
 	t_parse		parser;
 	t_texture	*texture;
-	t_player	player;
+	t_player	ply;
 	t_rect		rect;
 	t_dataray	*ray;
+	double		wallheight;
+	double		dpplan;
+	double		correctionwd;
+	double		tmp;
+	double		fov;
 }t_data;
 
 /****************************************************/
 /*				UTIL FUNCTIONS						*/
 /****************************************************/
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strrchr(const char *s, int c);
-char	*create_array(int size);
-char	**create_2d_array(int size);
-t_parse	*create_struct(void);
-void	ft_puterrmsg(char *msg);
-int		open_file(char *file);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*ft_strrchr(const char *s, int c);
+char		*create_array(int size);
+char		**create_2d_array(int size);
+t_parse		*create_struct(void);
+void		ft_puterrmsg(char *msg);
+int			open_file(char *file);
 
 /****************************************************/
 /*				PARSING FUNCTIONS					*/
@@ -158,28 +176,35 @@ int			check_map(t_parse *obj);
 t_parse		parse(char *file);
 
 /****************************************************/
+/*				RAYCASTING							*/
+/****************************************************/
+double		distance(double x1, double y1, double x2, double y2);
+double		normalize_angle(double angle);
+void		set_pos(t_pos *pos, t_ray ray);
+void		set_ray_direction(double rayangle, t_ray *ray);
+t_pos		get_shortest_dist(t_data *map, t_pos h_pos, t_pos v_pos);
+void		rows_lines(t_parse *parser);
+void		render_floor(t_img *img, int x, double y);
+t_texture	choose_texture(t_data *map, int ray_id);
+int			find_wall_hit(t_pos *pos, t_ray ray, t_data *map);
+t_pos		get_vertical_intersect(t_data *map, double rayangle);
+t_pos		get_horizontal_intersect(t_data *map, double rayangle);
+void		render_walls(t_data *obj, int nb_ray);
+int			get_texture(t_data *map, double y, int index, double wallheight);
+void		create_texture(t_data *map);
+int			cast_rays(t_data *map);
+t_pos		castray(t_data *map, double rayangle, int i, int flag);
+
+/****************************************************/
 /*				DRAW FUNCTIONS						*/
 /****************************************************/
-void	initiate_player_vars(t_data *obj, t_player *player);
-t_rect	player_initial_postion(t_parse *array);
-int		press_hook(int key, t_data *obj);
-int		release_hook(int key, t_data *obj);
-void	render_map(t_img *img, t_parse *array);
-void	draw(t_data *obj);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-
-
-void	render_ceiling(t_img *img, int x, double y);
-void	render_floor(t_img *img, int x, double y);
-t_texture	choose_texture(t_data *map, int ray_id);
-int		cast_rays(t_data *map);
-t_pos	castray(t_data *map, double rayangle, int i, int flag);
-int		find_wall_hit(t_pos *pos, t_ray ray, t_data *map);
-t_pos	get_vertical_intersect(t_data *map, double rayangle);
-t_pos	get_horizontal_intersect(t_data *map, double rayangle);
-void    render_walls(t_data *obj, int nb_ray);
-int		get_texture(t_data *map, double y, int index, double wallheight);
-void	create_texture(t_data *map);
-
-
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void		initiate_player_vars(t_data *obj, t_player *player);
+t_rect		player_initial_postion(t_parse *array);
+int			press_hook(int key, t_data *obj);
+int			release_hook(int key, t_data *obj);
+void		render_ceiling(t_img *img, int x, double y);
+int			render_player(t_img *img,  t_rect *rect);
+void		render_map(t_img *img, t_parse *array);
+void		draw(t_data *obj);
 #endif
