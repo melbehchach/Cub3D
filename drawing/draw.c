@@ -47,8 +47,6 @@ void	draw(t_data *obj)
     obj->img.addr = mlx_get_data_addr(obj->img.mlx_img, &obj->img.bpp, &obj->img.line_len, &obj->img.endian);
     initiate_player_vars(obj, &obj->player);
     hooks(obj);
-    cast_rays(obj);
-    render_map(&obj->img, &obj->parser);
     mlx_put_image_to_window(obj->mlx_ptr, obj->win_ptr, obj->img.mlx_img, 0, 0);
     mlx_loop(obj->mlx_ptr);
 }

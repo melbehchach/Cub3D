@@ -12,17 +12,22 @@ static int	exetention_checker(char *path)
 
 static int	check_direction_name(char *name)
 {
-	if (ft_strncmp(name, "NO ", 3) == 0 && exetention_checker(name))
+	int	i;
+
+	i = 0;
+	while (name[i] == ' ')
+		i++;
+	if (ft_strncmp(&name[i], "NO ", 3) == 0 && exetention_checker(name))
 		return (1);
-	else if (ft_strncmp(name, "SO ", 3) == 0 && exetention_checker(name))
+	else if (ft_strncmp(&name[i], "SO ", 3) == 0 && exetention_checker(name))
 		return (1);
-	else if (ft_strncmp(name, "WE ", 3) == 0 && exetention_checker(name))
+	else if (ft_strncmp(&name[i], "WE ", 3) == 0 && exetention_checker(name))
 		return (1);
-	else if (ft_strncmp(name, "EA ", 3) == 0 && exetention_checker(name))
+	else if (ft_strncmp(&name[i], "EA ", 3) == 0 && exetention_checker(name))
 		return (1);
-	else if (ft_strncmp(name, "F ", 2) == 0)
+	else if (ft_strncmp(&name[i], "F ", 2) == 0)
 		return (1);
-	else if (ft_strncmp(name, "C ", 2) == 0)
+	else if (ft_strncmp(&name[i], "C ", 2) == 0)
 		return (1);
 	return (0);
 }

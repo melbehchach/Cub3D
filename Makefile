@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g 
 NAME_M = cub
 HEADER = ./cub.h
 SRC = ./main.c \
@@ -23,7 +23,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME_M)
 
 $(NAME_M): $(OBJ)
-	$(CC) $(OBJ) ./minilibx/libmlx.a -framework OpenGL -framework AppKit -o $(NAME_M)
+	$(CC) $(CFLAGS) $(OBJ) ./minilibx/libmlx.a -framework OpenGL -framework AppKit -o $(NAME_M)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)

@@ -32,7 +32,10 @@ static int	lines_counter(t_parse *obj, char *file)
 		if (obj->length > 1)
 			obj->size++;
 		if (obj->size > 6 && obj->length <= 1)
+		{
+			close(obj->fd);
 			return (-1);
+		}
 	obj->nb_line++;
 	}
 	close(obj->fd);
@@ -48,13 +51,14 @@ static void	fill_map_array(t_parse *obj)
 		obj->length = ft_strlen(obj->line);
 		if (obj->length > 1)
 		{
-			obj->content[obj->index] = create_array(obj->length);
+			obj->content[obj->index] = (char *)malloc((sizeof(char) * obj->length) + 1);
+			if (!obj->content[obj->index])
+				return;
 			ft_strlcpy(obj->content[obj->index], obj->line, obj->length);
 			obj->index++;
 		}
 		obj->nb_line--;
 	}
-	obj->content[obj->index] = NULL;
 }
 
 int	create_content_array(t_parse *obj, char *file)
@@ -69,7 +73,7 @@ int	create_content_array(t_parse *obj, char *file)
 		printf("Error\nOops empty file !\n");
 		return (2);
 	}
-	obj->content = create_2d_array(obj->size);
+	obj->content = (char **)malloc((sizeof(char *) * obj->size));
 	if (!obj->content)
 		return (2);
 	fill_map_array(obj);

@@ -35,9 +35,10 @@ int	detect_player(char *line)
 
 int check_player(t_parse *obj)
 {
-	obj->index = 7;
 	obj->player = 0;
-	while (obj->content[obj->index])
+	obj->index = 6;
+	// printf("size == %d\n", obj->size);
+	while (obj->index < obj->size)
 	{
 		if (detect_player(obj->content[obj->index]) == 1)
 		{

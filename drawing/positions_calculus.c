@@ -9,7 +9,9 @@ t_rect   player_initial_postion(t_parse *array)
 
 	i = 0;
 	k = 5;
-	while (array->content[++k])
+    rect.x = 0;
+    rect.x = 0;
+	while (++k < array->size)
 	{
 		j = -1;
 		while (array->content[k][++j])
@@ -17,8 +19,8 @@ t_rect   player_initial_postion(t_parse *array)
 			if (array->content[k][j] == 'N' || array->content[k][j] == 'S' || \
                 array->content[k][j] == 'E' || array->content[k][j] == 'W')
 			{
-                rect.x = (j * TILE_SIZE) + (TILE_SIZE / 2);
-                rect.y = (i * TILE_SIZE) + (TILE_SIZE / 2);
+                rect.x = (j * TILE_SIZE) + (TILE_SIZE * 0.2);
+                rect.y = (i * TILE_SIZE) + (TILE_SIZE * 0.2);
                 rect.direction = array->content[k][j];
             }
 		}
@@ -42,9 +44,9 @@ void initiate_player_vars(t_data *obj, t_player *player)
         player->rotationAngle = 0;
     else if (obj->rect.direction == 'W')
         player->rotationAngle = PI;
-    player->moveSpeed = 2.0;
+    player->moveSpeed = 3.0;
     player->moveStep = 0;
-    player->rotationSpeed= 2.0 * (PI / 180);
+    player->rotationSpeed= 3.0 * (PI / 180);
 }
 
 int  press_hook(int key, t_data *obj)

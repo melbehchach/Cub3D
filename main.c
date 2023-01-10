@@ -3,20 +3,19 @@
 static char	*get_textur_path(char **array, char *str)
 {
 	char	*path;
-	int		length;
 	int		i;
+	int		j;
 
 	i = -1;
 	while (array[++i])
 	{
-		if (ft_strncmp(array[i], str, 2) == 0)
+		j = -1;
+		while (array[i][++j] == 32)
+			j++;
+		if (ft_strncmp(&array[i][j], str, 2) == 0)
 			break;
 	}
-	length = ft_strlen(array[i]);
-	path = malloc((sizeof(char) * length) + 1);
-	if (!path)
-		return (NULL);
-	ft_strlcpy(path, &array[i][3], length);
+	path = ft_strchr(&array[i][j], '.');
 	return (path);
 }
 
@@ -28,16 +27,16 @@ static void	fill_textur_array(t_data *obj)
 	obj->texture = (t_texture *)malloc((sizeof(t_texture) * 4));
 	if (!obj->texture)
 		return;
-	while (++i < 4)
+	while (++i < 6)
 	{
 		if (i == 0)
-			obj->texture[i].path = get_textur_path(obj->parser.content, "NO");
-		if (i == 1)
 			obj->texture[i].path = get_textur_path(obj->parser.content, "SO");
-		if (i == 2)
+		if (i == 1)
 			obj->texture[i].path = get_textur_path(obj->parser.content, "EA");
-		if (i == 3)
+		if (i == 2)
 			obj->texture[i].path = get_textur_path(obj->parser.content, "WE");
+		if (i == 3)
+			obj->texture[i].path = get_textur_path(obj->parser.content, "NO");
 	}
 }
 

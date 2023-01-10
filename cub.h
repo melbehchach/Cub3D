@@ -11,13 +11,14 @@
 #include "./get_next_line/get_next_line.h"
 
 # define WIN_WIDTH 1280
-# define WIN_HEIGHT 900
-# define TILE_SIZE 40
-# define PI 3.14159265359
+# define WIN_HEIGHT 860
+# define TILE_SIZE 10
+# define PI 3.14159
 # define WALL_STRIP_WIDTH 1
 # define RED 14423572
+# define GREEN 2022430
 # define WHITE 14474440
-# define BLEU 3289700
+# define BLEU 3325695
 # define BLACK 0
 # define ESC 53
 # define W 13
@@ -163,12 +164,13 @@ void	initiate_player_vars(t_data *obj, t_player *player);
 t_rect	player_initial_postion(t_parse *array);
 int		press_hook(int key, t_data *obj);
 int		release_hook(int key, t_data *obj);
-int		render_rotation_line(t_img *img, double x, double y, double angle);
 void	render_map(t_img *img, t_parse *array);
 void	draw(t_data *obj);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 
+void	render_ceiling(t_img *img, int x, double y);
+void	render_floor(t_img *img, int x, double y);
 t_texture	choose_texture(t_data *map, int ray_id);
 int		cast_rays(t_data *map);
 t_pos	castray(t_data *map, double rayangle, int i, int flag);

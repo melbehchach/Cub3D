@@ -22,15 +22,18 @@ static int	check_sides_of_zero(char *line, int length)
 	i = 0;
 	while (i < length)
 	{
-		if (line[i - 1] == 32)
+		if (line[i] == '0')
 		{
-			printf("befor the 0 fund space\n");
-			return (1);
-		}
-		else if (line[i + 1] == 32)
-		{
-			printf("after the 0 found space\n");
-			return (1);
+			if (line[i - 1] == 32)
+			{
+				printf("befor the 0 fund space\n");
+				return (1);
+			}
+			else if (line[i + 1] == 32)
+			{
+				printf("after the 0 found space\n");
+				return (1);
+			}
 		}
 		i++;
 	}
@@ -64,13 +67,13 @@ static int check_top_bottom(char *line, char *line2, char *line3)
 	return (0);
 }
 
-static int	map_filter(char **array)
+static int	map_filter(char **array, int size)
 {
 	int	i;
 	int	j;
 
 	i = 6;
-	while (array[i])
+	while (i < size)
 	{
 		j = 0;
 		while (array[i][j])
@@ -93,8 +96,8 @@ static int	map_filter(char **array)
 
 int	check_map(t_parse *obj)
 {
-	obj->index = 7;
-	if (map_filter(obj->content) == 1)
+	obj->index = 6;
+	if (map_filter(obj->content, obj->size) == 1)
 		return (6);
 	while (obj->index < (obj->size - 1))
 	{

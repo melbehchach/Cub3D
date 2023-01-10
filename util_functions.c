@@ -77,7 +77,7 @@ char	*create_array(int size)
 {
 	char	*tab;
 
-	tab = malloc((sizeof(char) * size) + 1);
+	tab = malloc((sizeof(char) * size));
 	if (!tab)
 		tab = NULL;
 	return (tab);
@@ -87,7 +87,7 @@ char	**create_2d_array(int size)
 {
 	char **tab;
 
-	tab = malloc((sizeof(char *) * size) + 1);
+	tab = malloc((sizeof(char *) * size));
 	if(!tab)
 		tab = NULL;
 	return (tab);

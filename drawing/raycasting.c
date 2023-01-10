@@ -78,18 +78,19 @@ static  void rows_lines(t_parse *parser)
     y = 6;
     x = 0;
     parser->nb_line = 0;
-    while (parser->content[y])
+    while (y < (parser->size - 1))
     {
         x++;
         y++;
     }
     parser->nb_line = x;
+	printf("%d\n", x);
 }
 
 void	drawline(t_data *map, double x0, double y0)
 {
 	t_dda	dda;
-	int		i;
+	// int		i;
 
 	dda.dx = map->player.posx - x0;
 	dda.dy = map->player.posy - y0;
@@ -99,13 +100,13 @@ void	drawline(t_data *map, double x0, double y0)
 		dda.step = fabs(dda.dy);
 	dda.xinc = dda.dx / dda.step;
 	dda.yinc = dda.dy / dda.step;
-	i = 0;
-	while (++i <= dda.step)
-	{
-		my_mlx_pixel_put(&map->img, x0 * 0.2, y0 * 0.2, 0xFF0000);
-		x0 += dda.xinc;
-		y0 += dda.yinc;
-	}
+	// i = 0;
+	// while (++i <= dda.step)
+	// {
+	// 	my_mlx_pixel_put(&map->img, x0 * 0.2, y0 * 0.2, RED);
+	// 	x0 += dda.xinc;
+	// 	y0 += dda.yinc;
+	// }
 }
 
 ///////////////////////////////////////////////////////
@@ -128,9 +129,9 @@ int	cast_rays(t_data *map)
         drawline(map, map->ray[rays].x, map->ray[rays].y);
 		rayangle += fov / WIN_WIDTH;
 	}
+    // render_map(&map->img, &map->parser);
 	create_texture(map);
 	render_walls(map, rays);
-    render_map(&map->img, &map->parser);
 	return (0);
 }
 
@@ -175,7 +176,7 @@ int	find_wall_hit(t_pos *pos, t_ray ray, t_data *map)
 		set_pos(pos, ray);
 		if ((pos->tmpy / TILE_SIZE) > map->parser.nb_line
 			|| pos->tmpy < 0
-            || pos->tmpx > (ft_strlen(map->parser.content[(int)(pos->tmpy / TILE_SIZE) + 6]) - 1) * TILE_SIZE
+            || pos->tmpx > (ft_strlen(map->parser.content[(int)(pos->tmpy / TILE_SIZE) + 6])) * TILE_SIZE
 			|| pos->tmpx < 0)
 			return (0);
 		if (check_for_wall(map, pos))
