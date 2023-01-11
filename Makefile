@@ -12,6 +12,7 @@ SRC = ./main.c \
 		./parser/direction_elements.c \
 		./parser/map_parser.c \
 		./parser/map_parser2.c \
+		./parser/ceiling_floor.c \
 		./drawing/positions_calculus.c \
 		./drawing/map_player_render.c \
 		./drawing/render3Dwall.c \

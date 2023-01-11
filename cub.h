@@ -149,6 +149,14 @@ typedef struct s_data
 	double		correctionwd;
 	double		tmp;
 	double		fov;
+	double		newx;
+	double		newy;
+	int			cred;
+	int			cgreen;
+	int			cbleu;
+	int			fred;
+	int			fgreen;
+	int			fbleu;
 }t_data;
 
 /****************************************************/
@@ -157,11 +165,11 @@ typedef struct s_data
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strrchr(const char *s, int c);
-char		*create_array(int size);
-char		**create_2d_array(int size);
-t_parse		*create_struct(void);
+int			ft_atoi(const char *str);
+int			ft_isdigit(int c);
 void		ft_puterrmsg(char *msg);
 int			open_file(char *file);
+void	check_rgb(t_data *obj);
 
 /****************************************************/
 /*				PARSING FUNCTIONS					*/
@@ -204,7 +212,6 @@ t_rect		player_initial_postion(t_parse *array);
 int			press_hook(int key, t_data *obj);
 int			release_hook(int key, t_data *obj);
 void		render_ceiling(t_img *img, int x, double y);
-int			render_player(t_img *img,  t_rect *rect);
 void		render_map(t_img *img, t_parse *array);
 void		draw(t_data *obj);
 #endif

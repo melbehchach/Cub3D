@@ -65,6 +65,7 @@ int	main(int ac, char **av)
 	}
 	obj.parser = parse(av[1]);
 	fill_textur_array(&obj);
+	check_rgb(&obj);
 	draw(&obj);
 	return (0);
 }

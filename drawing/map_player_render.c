@@ -54,23 +54,6 @@ static int	render_rect(t_img *img, t_rect *rect)
 	return (0);
 }
 
-int render_player(t_img *img,  t_rect *rect)
-{
-	double	i;
-	double j;
-	rect->height = TILE_SIZE / 2;
-	rect->width = TILE_SIZE / 2;
-	i = (rect->y);
-	while (i < rect->y)
-	{
-		j = (rect->x + (TILE_SIZE * 0.2));
-		while (j < rect->x + rect->width)
-			my_mlx_pixel_put(img, j++, i, RED);
-		++i;
-	}
-	return (0);
-}
-
 void	render_map(t_img *img, t_parse *array)
 {
 	t_rect	rect;
