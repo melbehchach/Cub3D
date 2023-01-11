@@ -67,6 +67,7 @@ int	press_hook(int key, t_data *obj)
 	if (key == 53)
 	{
 		mlx_destroy_window(obj->mlx_ptr, obj->win_ptr);
+		free_content(obj);
 		exit (EXIT_SUCCESS);
 	}
 	else if (key == 13)

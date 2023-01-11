@@ -1,105 +1,137 @@
 #include "../cub.h"
 
-// static int	check_letter(t_data *obj, int row)
-// {
-// 	int length;
-// 	int	index;
-
-// 	index = 0;
-// 	length = ft_strlen(obj->parser.content[row]);
-// 	while (index < length)
-// 	{
-// 		if (obj->parser.content[row][index] == 32)
-// 			index++;
-// 		else if (obj->parser.content[row][index] == 'F' || obj->parser.content[row][index] == 'C'
-// 		&& obj->parser.content[row][index + 1] == 32)
-// 			break ;
-// 		index++;
-// 	}
-// 	return (index);
-// }
-
-// static int	check_number(t_data *obj, int index)
-// {
-// 	int	length;
-
-// 	length = ft_strlen(obj->parser.content[4]);
-// 	while (index < length)
-// 	{
-// 		if (obj->parser.content[4][index] == 32)
-// 			index++;
-// 		else if (ft_isdigit(obj->parser.content[4][index]))
-// 			break ;
-// 		index++;
-// 	}
-// 	return (index);
-// }
-
-// static void	get_color(t_data *obj, int index, int comma, int row)
-// {
-// 	char	*color;
-// 	int	length;
-// 	int	j;
-
-// 	j = 0;
-// 	length = ft_strlen(obj->parser.content[4]);
-// 	while (index < length)
-// 	{
-// 		if (ft_isdigit(obj->parser.content[4][index]))
-// 			j++;
-// 		else if (obj->parser.content[4][index] == ',')
-// 		{
-// 			color = malloc(sizeof(char) * j);
-// 			if (!color)
-// 				return;
-// 			ft_strlcpy(color, &obj->parser.content[4][i - j], (j + 1));
-// 			obj->cred = ft_atoi(color);
-// 			free(color);
-// 			exit(0);
-// 		}
-// 	}
-	
-// }
-
-satatic void	check_chars(t_data *obj)
+static char	check_fc(char *row)
 {
-	int length;
-	int	row;
-	int	i;
+	char	letter;
+	int		i;
 
-	row = 4;
 	i = 0;
-	while (row < 6)
-	{
-		length = ft_strlen(obj->parser.content[row]);
-		while (i < length)
-		{
-			if (obj->parser.content[row][i] == 32 || ft_isdigit(obj->parser.content[row][i]) || )
-				i++;
-		}
-		
-	}
-	
+	letter = '\0';
+	while (row[i] == 32)
+		i++;
+	if (row[i] == 'F')
+		letter = 'F';
+	else if (row[i] == 'C')
+		letter = 'C';
+	return (letter);
 }
 
-void	check_rgb(t_data *obj)
+static int	assigne_floo_rgb(t_data *obj, char *row, int *size, char rgb)
 {
+	char	*color;
+
+	color = malloc(sizeof(char) * (*size));
+	if (!color)
+		return (0);
+	ft_strlcpy(color, row, *size + 1);
+	if (rgb == 'r')
+		obj->fred = ft_atoi(color);
+	else if (rgb == 'g')
+		obj->fgreen = ft_atoi(color);
+	else if (rgb == 'b')
+		obj->fbleu = ft_atoi(color);
+	free(color);
+	*size = 0;
+	return (1);
+}
+
+static void	get_floor_info(t_data *obj, char *row)
+{
+	int	length;
 	int	comma;
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 4;
-	comma = 3;
-	i = check_letter(obj);
-	i = check_number(obj, i);
-	i--;
-	while (j < 6)
+	i = -1;
+	j = 0;
+	comma = 0;
+	length = ft_strlen(row);
+	while (++i < (length + 1))
 	{
-		while()
-		{
-			
-		}
+		if (ft_isdigit(row[i]) && row[i] != ',')
+			j++;
+		if (row[i] == ',' && comma == 0)
+			comma += assigne_floo_rgb(obj, &row[i - j], &j, 'r');
+		else if (row[i] == ',' && comma == 1)
+			comma += assigne_floo_rgb(obj, &row[i - j], &j, 'g');
+		else if (!row[i] && comma == 2)
+			assigne_floo_rgb(obj, &row[i - j], &j, 'b');
 	}
-	
+}
+
+static int	assigne_ceiling_rgb(t_data *obj, char *row, int *size, char rgb)
+{
+	char	*color;
+
+	color = malloc(sizeof(char) * (*size));
+	if (!color)
+		return (0);
+	ft_strlcpy(color, row, *size + 1);
+	if (rgb == 'r')
+		obj->cred = ft_atoi(color);
+	else if (rgb == 'g')
+		obj->cgreen = ft_atoi(color);
+	else if (rgb == 'b')
+		obj->cbleu = ft_atoi(color);
+	free(color);
+	*size = 0;
+	return (1);
+}
+
+static void	get_ceiling_info(t_data *obj, char *row)
+{
+	int	length;
+	int	comma;
+	int	i;
+	int	j;
+
+	i = -1;
+	j = 0;
+	comma = 0;
+	length = ft_strlen(row);
+	while (++i < (length + 1))
+	{
+		if (ft_isdigit(row[i]) && row[i] != ',')
+			j++;
+		if (row[i] == ',' && comma == 0)
+			comma += assigne_ceiling_rgb(obj, &row[i - j], &j, 'r');
+		else if (row[i] == ',' && comma == 1)
+			comma += assigne_ceiling_rgb(obj, &row[i - j], &j, 'g');
+		else if (!row[i] && comma == 2)
+			assigne_ceiling_rgb(obj, &row[i - j], &j, 'b');
+	}
+}
+
+static int	rgb_range(int color)
+{
+	if (color < 0 || color > 255)
+		return (0);
+	return (1);
+}
+
+int	check_rgb(t_data *obj)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 6)
+	{
+		if (check_fc(obj->parser.content[i]) == 'F')
+			get_floor_info(obj, obj->parser.content[i]);
+		else if (check_fc(obj->parser.content[i]) == 'C')
+			get_ceiling_info(obj, obj->parser.content[i]);
+	}
+	if (!rgb_range(obj->fred))
+		return (7);
+	if (!rgb_range(obj->fgreen))
+		return (7);
+	if (!rgb_range(obj->fbleu))
+		return (7);
+	if (!rgb_range(obj->cred))
+		return (7);
+	if (!rgb_range(obj->cgreen))
+		return (7);
+	if (!rgb_range(obj->cbleu))
+		return (7);
+	return (1);
 }

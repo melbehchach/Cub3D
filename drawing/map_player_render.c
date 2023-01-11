@@ -20,20 +20,25 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
-void	render_ceiling(t_img *img, int x, double y)
+int	create_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
+void	render_ceiling(t_data *obj, int x, double y)
 {
 	while (y > 0)
 	{
-		my_mlx_pixel_put(img, x, y, BLEU);
+		my_mlx_pixel_put(&obj->img, x, y, create_rgb(obj->cred, obj->cgreen, obj->cbleu));
 		y--;
 	}
 }
 
-void	render_floor(t_img *img, int x, double y)
+void	render_floor(t_data *obj, int x, double y)
 {
 	while (y < WIN_HEIGHT)
 	{
-		my_mlx_pixel_put(img, x, y, GREEN);
+		my_mlx_pixel_put(&obj->img, x, y, create_rgb(obj->fred, obj->fgreen, obj->fbleu));
 		y++;
 	}
 }

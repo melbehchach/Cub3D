@@ -68,6 +68,7 @@ void	create_texture(t_data *map)
 		if (!map->texture[i].img.mlx_img)
 		{
 			printf("Error Reading. texture\n GAME CLOSED\n");
+			free_content(map);
 			exit(EXIT_FAILURE);
 		}
 		map->texture[i].img.addr

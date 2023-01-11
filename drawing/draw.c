@@ -15,6 +15,7 @@
 static int	close_red_button(t_data *obj)
 {
 	mlx_destroy_window(obj->mlx_ptr, obj->win_ptr);
+	free_content(obj);
 	exit (EXIT_SUCCESS);
 	return (0);
 }

@@ -50,8 +50,8 @@ void	render_walls(t_data *obj, int nb_ray)
 		obj->rect.y = (WIN_HEIGHT / 2) - (obj->wallheight / 2);
 		obj->rect.width = WALL_STRIP_WIDTH;
 		obj->rect.height = obj->wallheight;
-		render_ceiling(&obj->img, i, obj->rect.y);
-		render_floor(&obj->img, i, (obj->rect.y + obj->wallheight));
+		render_ceiling(obj, i, obj->rect.y);
+		render_floor(obj, i, (obj->rect.y + obj->wallheight));
 		render_3d(obj, &obj->img, i, obj->tmp);
 	}
 }

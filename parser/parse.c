@@ -40,6 +40,8 @@ static void	error_msg(int code)
 		printf("Error\nSomething wrong with the player\n");
 	if (code == 6)
 		printf("Error\nProblem in the map\n");
+	if (code == 7)
+		printf("Error\nProblem in the RGB colors\n");
 	exit (EXIT_FAILURE);
 }
 

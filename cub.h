@@ -169,7 +169,7 @@ int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
 void		ft_puterrmsg(char *msg);
 int			open_file(char *file);
-void	check_rgb(t_data *obj);
+void		free_content(t_data *obj);
 
 /****************************************************/
 /*				PARSING FUNCTIONS					*/
@@ -181,6 +181,7 @@ int			borders_checker(int nb_line, t_parse *obj);
 int			detect_player(char *line);
 int			check_player(t_parse *obj);
 int			check_map(t_parse *obj);
+int			check_rgb(t_data *obj);
 t_parse		parse(char *file);
 
 /****************************************************/
@@ -192,7 +193,6 @@ void		set_pos(t_pos *pos, t_ray ray);
 void		set_ray_direction(double rayangle, t_ray *ray);
 t_pos		get_shortest_dist(t_data *map, t_pos h_pos, t_pos v_pos);
 void		rows_lines(t_parse *parser);
-void		render_floor(t_img *img, int x, double y);
 t_texture	choose_texture(t_data *map, int ray_id);
 int			find_wall_hit(t_pos *pos, t_ray ray, t_data *map);
 t_pos		get_vertical_intersect(t_data *map, double rayangle);
@@ -207,11 +207,13 @@ t_pos		castray(t_data *map, double rayangle, int i, int flag);
 /*				DRAW FUNCTIONS						*/
 /****************************************************/
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int			create_rgb(int r, int g, int b);
 void		initiate_player_vars(t_data *obj, t_player *player);
 t_rect		player_initial_postion(t_parse *array);
 int			press_hook(int key, t_data *obj);
 int			release_hook(int key, t_data *obj);
-void		render_ceiling(t_img *img, int x, double y);
+void		render_floor(t_data *obj, int x, double y);
+void		render_ceiling(t_data *obj, int x, double y);
 void		render_map(t_img *img, t_parse *array);
 void		draw(t_data *obj);
 #endif
