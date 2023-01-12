@@ -6,7 +6,7 @@
 /*   By: mel-behc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:02:08 by mel-behc          #+#    #+#             */
-/*   Updated: 2023/01/10 16:03:02 by mel-behc         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:54:47 by mel-behc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,27 @@ static void	fill_textur_array(t_data *obj)
 	}
 }
 
+static void	rgb_error(t_data *obj)
+{
+	int		i;
+
+	if (check_rgb(obj) == 7)
+	{
+		printf("Error\nProblem in the RGB colors\n");
+		i = -1;
+		while (++i < obj->parser.size)
+		{
+			free(obj->parser.content[i]);
+			obj->parser.content[i] = NULL;
+		}	
+		exit(EXIT_FAILURE);
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_data	obj;
-	int		i = -1;
+
 	if (ac != 2)
 		return (0);
 	if (!file_name_checker(av[1]))
@@ -81,17 +98,7 @@ int	main(int ac, char **av)
 	}
 	obj.parser = parse(av[1]);
 	fill_textur_array(&obj);
-	if (check_rgb(&obj) == 7)
-	{
-		printf("Error\nProblem in the RGB colors\n");
-		i = -1;
-		while (++i < obj.parser.size)
-		{
-			free(obj.parser.content[i]);
-			obj.parser.content[i] = NULL;
-		}	
-		exit(EXIT_FAILURE);
-	}
+	rgb_error(&obj);
 	draw(&obj);
 	free_content(&obj);
 	return (0);

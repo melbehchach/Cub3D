@@ -32,7 +32,8 @@ static int	lines_counter(t_parse *obj, char *file)
 			close(obj->fd);
 			return (-1);
 		}
-	obj->nb_line++;
+		free(obj->line);
+		obj->nb_line++;
 	}
 	close(obj->fd);
 	return (0);
@@ -55,6 +56,7 @@ static void	fill_map_array(t_parse *obj)
 			obj->index++;
 		}
 		obj->nb_line--;
+		free(obj->line);
 	}
 }
 

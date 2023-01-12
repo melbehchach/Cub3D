@@ -181,6 +181,8 @@ int			borders_checker(int nb_line, t_parse *obj);
 int			detect_player(char *line);
 int			check_player(t_parse *obj);
 int			check_map(t_parse *obj);
+void		get_floor_info(t_data *obj, char *row);
+void		get_ceiling_info(t_data *obj, char *row);
 int			check_rgb(t_data *obj);
 t_parse		parse(char *file);
 
@@ -210,10 +212,12 @@ void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int			create_rgb(int r, int g, int b);
 void		initiate_player_vars(t_data *obj, t_player *player);
 t_rect		player_initial_postion(t_parse *array);
+int			close_red_button(t_data *obj);
 int			press_hook(int key, t_data *obj);
 int			release_hook(int key, t_data *obj);
 void		render_floor(t_data *obj, int x, double y);
 void		render_ceiling(t_data *obj, int x, double y);
 void		render_map(t_img *img, t_parse *array);
+int			re_render(t_data *obj);
 void		draw(t_data *obj);
 #endif
